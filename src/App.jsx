@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom";
 import NavBar from "./components/navBar/NavBar";
 import LeftBar from "./components/leftBar/LeftBar";
 import RightBar from "./components/rightBar/RightBar";
@@ -9,6 +9,8 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 
 function App() {
+
+  const currentUser = false; //temporary for the f-end part
 
   const Layout = () => {
     return(
@@ -25,10 +27,17 @@ function App() {
     )
   }
 
+  const ProtectdRotues = ({children}) => {
+    if(!currentUser){
+      return <Navigate to="/login" /> //checks if logged in if not logged in then redirects
+    }
+
+    return children  //if logged in the returns the page layout
+  }
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: <ProtectdRotues> <Layout /> </ProtectdRotues> ,
       children: [
         {
           path: "/",
