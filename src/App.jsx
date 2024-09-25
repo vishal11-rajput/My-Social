@@ -10,16 +10,17 @@ import Profile from "./pages/profile/Profile";
 
 function App() {
 
-  const currentUser = false; //temporary for the f-end part
+  const currentUser = true; //temporary for the f-end part
 
   const Layout = () => {
     return(
-      <div>
-        
+      <div className="theme-dark">
         <NavBar />
         <div style={{display: "flex"}}>
-        <LeftBar />
-        <Outlet />
+          <LeftBar />
+        <div style={{flex : 6}}>
+            <Outlet />
+        </div>
         <RightBar />
        
         </div>
